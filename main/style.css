@@ -67,7 +67,7 @@ h2{
 }
 .inputGoals{
 	border: none;
-	background-color: #FBFBFB;
+	background-color: #FFFFFF;
 	width: 550px;
 	height: 56px;
 	/* border: 1px solid black; */
@@ -118,4 +118,59 @@ footer{
 .smallMessage{
 	font-size: 9px;
 	color: red;
+}
+.add{
+	background-color: rgb(233, 93, 98);
+	height: 25px;
+	width: 45px;
+	font-size: 12px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 15px;
+	color: white;
+	font-weight: 600;
+	border-radius: 15%;
+	cursor: pointer;
+}
+.finalTask{
+	font-size: 14px;
+	font-weight:500 ;
+	width: 550px;
+	height: 56px;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	/* border: 1px solid black; */
+	
+  /* text-decoration-skip-ink: none;  */
+
+}
+.icon{
+	height: 30px;
+	transition: 0.15s ease;
+	margin-right: 20px;
+	
+}
+
+.icon:hover{
+	filter: brightness(0.8);
+	
+
+}
+.completedTask{
+	text-decoration: line-through;
+  text-decoration-thickness: 1px;    /* control thickness */
+  text-decoration-color: #48A300;
+  color: #48A300;
+}
+.completedLogo{
+	height: 15px;
+	margin-left: 10px;
+	transition: 0.15 ease;
+}
+.done{
+	height: 30px;
+	
+	margin-right: 20px;
 }
