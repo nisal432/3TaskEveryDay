@@ -1,0 +1,121 @@
+*{
+	margin: 0;padding: 0;
+	
+	box-sizing: border-box;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+html, body{
+	width: 100%;
+	height: 100%;
+	
+	background-color: #F2F9ED;
+}
+.mainHeading{
+	color: #47A200;
+	text-align: center;
+}
+.mainHeading h1::after{
+	content: ' Everyday';
+	color: #61481C;
+}
+.mainContainer{
+	border: 1.5px solid #0000001A;
+	margin-bottom: 20px;
+	height: 500px;
+	width: 645px;
+	background-color: #FBFBFB;
+	border-radius: 15px;
+	padding: 20px;
+}
+.main{
+	display: flex;
+	justify-content: center ;
+	margin-top: 50px;
+	
+
+}
+img{
+	margin-left: 5px;
+	/* border: 2px solid black ; */
+	height: 35px;
+}
+h2{
+	display: flex;
+	gap: 6.7px;
+
+}
+.reminderText{
+	color: #858585;
+	font-size: 14px;
+
+	margin-top: 10px;
+	margin-bottom: 15px;
+}
+.progressBar{
+	width: 600px;
+	height: 20px;
+	background-color: #48A3001A;
+	border-radius: 15px;
+
+
+}
+.warningMessage{
+	font-size: 14px;
+	color: #FF5151;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.inputGoals{
+	border: none;
+	background-color: #FBFBFB;
+	width: 550px;
+	height: 56px;
+	/* border: 1px solid black; */
+}
+.inputGoals:focus{
+	/* border: 1px solid black; */
+	outline: none;
+}
+.inputContainer{
+	background-color: #FFFFFF;
+	border: 1.5px solid #0000001A;
+	height: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 13px;
+	border-radius: 10px;
+	transition: 0.2s ease-in;
+	margin-bottom: 20px;
+
+}
+.circle{
+	height: 15px;
+	width: 15px;
+	border: 2px solid #61481C4D;
+	border-radius: 7.5px;
+	margin-left: 10px;
+	transition: 0.15 ease;
+}
+.inputContainer:focus-within{
+	border-width: 1.5px;
+	border-color: blue;
+}
+.circle:hover{
+	border-color: blue;
+	cursor: pointer;
+}
+footer{
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	justify-content: center;
+	align-items: center;
+	margin-top: 45px;
+	font-size: 12px;
+	font-weight: 500;
+}
+.smallMessage{
+	font-size: 9px;
+	color: red;
+}
