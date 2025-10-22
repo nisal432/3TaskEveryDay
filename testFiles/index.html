@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Before Animation Test</title>
+  <style>
+    .box {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      padding: 10px 20px;
+      font-family: sans-serif;
+      border: 1px solid #ccc;
+    }
+
+    .box::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 0px; /* starting width */
+      background-color: blue;
+      transition: all 0.3s ease; /* animation */
+    }
+
+    .active::before {
+      width: 10px; /* target width */
+    }
+  </style>
+</head>
+<body>
+  <div class="box">Click Me</div>
+
+  
+</body>
+<script>
+    const box = document.createElement('div')
+	box.classList.add('box')
+	const box2 = box.cloneNode(true)
+	document.body.appendChild(box2)
+    box2.addEventListener('click', () => {
+      box2.classList.toggle('active');
+    });
+	console.log('hello');
+  </script>
+</html>
