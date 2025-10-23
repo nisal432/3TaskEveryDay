@@ -98,10 +98,10 @@ h2{
 
 }
 .circle{
-	height: 15px;
-	width: 15px;
+	height: 16px;
+	width: 16px;
 	border: 2px solid #61481C4D;
-	border-radius: 7.5px;
+	border-radius: 20.5px;
 	margin-left: 10px;
 	transition: 0.15 ease;
 }
@@ -110,8 +110,10 @@ h2{
 	border-color: blue;
 }
 .circle:hover{
-	border-color: blue;
+	border-color: #1000a3;
+	border-width: 2.2px;
 	cursor: pointer;
+	
 }
 footer{
 	display: flex;

@@ -1,15 +1,22 @@
 console.log("okay this is working");
+localStorage.clear()
+const date = new Date()
+console.log(date.toISOString());
+const todayDate = date.toISOString().slice(0,10)
+console.log(todayDate);
 const changingMessage = document.querySelector('.warningMessage')
-let selectedTask = 0;
-let completedTask = 0;
-let progressValue = 0;
-const totalTask =3;
+let selectedTask = parseInt(localStorage.getItem('selectedTask')) || 0;
+let completedTask = parseInt(localStorage.getItem('completedTask')) || 0;
+let progressValue = parseInt(localStorage.getItem('progressValue')) || 0;
+const totalTask = 3;
 const reminderText = document.querySelector('.reminderText')
 const progressMessage = document.querySelector('.progressMessage')
 const progressBar = document.querySelector('.progressValue')
 const allTasks = document.querySelectorAll('.inputContainer')
-allTasks.forEach((task) => {
-	let check = true;
+allTasks.forEach((task, i) => {
+
+
+	
 	const input = task.children[1]
 	input.addEventListener('focus', () => {
 		changingMessage.style.opacity = '0'
@@ -53,43 +60,62 @@ allTasks.forEach((task) => {
 		task.replaceChild(input, warn)
 		input.focus()
 	})
+	
+	if(!(localStorage.getItem(`tasks${i}`))){
+	localStorage.setItem(`tasks${i}`, JSON.stringify({
+		taskAdded: true,
+		taskCompleted: false,
+		inputValue: '',
 
-	if (input) {
-
-		input.addEventListener('keydown', (e) => {
-
-			if (e.key === 'Enter' && input.value) {
-				if (check) {
-					selectedTask++;
-					check = false;
-				}
-				if(selectedTask ==3){
-					progressMessage.innerText = '0/3 completed'
-				}
-				changingMessage.style.opacity = '0'
-				span.innerText = input.value;
-				task.replaceChild(replaceDiv, input)
-
-				task.replaceChild(editElement, task.children[2])
-
-			}
-		})
+	}))}
+	
+	const mainObject = JSON.parse(localStorage.getItem(`tasks${i}`))
+	
+	function replaceInput(inputValue) {
+		if (inputValue) input.value = inputValue;
+		changingMessage.style.opacity = '0'
+		span.innerText = input.value;
+		task.replaceChild(replaceDiv, input)
+		
+		task.replaceChild(editElement, task.children[2])
 	}
+	
+	if(!mainObject.taskAdded){
+		replaceInput(mainObject.inputValue)
+	}
+
+
+	input.addEventListener('keydown', (e) => {
+
+		if (e.key === 'Enter' && input.value) {
+			if (mainObject.taskAdded) {
+				selectedTask++;
+				localStorage.setItem('selectedTask', selectedTask)
+				mainObject.taskAdded = false;
+				localStorage.setItem(`tasks${i}`, JSON.stringify(mainObject))
+			}
+			if (selectedTask == 3) {
+				progressMessage.innerText = '0/3 completed'
+			}
+			replaceInput()
+			mainObject.inputValue = input.value
+			localStorage.setItem(`tasks${i}`, JSON.stringify(mainObject))
+
+		}
+	})
+	
+
 	task.children[2].addEventListener('click', (e) => {
 		if (input.value) {
-			if (check) {
+			if (mainObject.taskAdded) {
 				selectedTask++;
-				check = false;
+				mainObject.taskAdded = false;
+				localStorage.setItem(`tasks${i}`, JSON.stringify(mainObject))
 			}
-			if(selectedTask ==3){
-					progressMessage.innerText = '0/3 completed'
-				}
-			changingMessage.style.opacity = '0'
-			span.innerText = input.value;
-			task.replaceChild(replaceDiv, input)
-
-			task.replaceChild(editElement, task.children[2])
-
+			if (selectedTask == 3) {
+				progressMessage.innerText = '0/3 completed'
+			}
+			replaceInput()
 
 		}
 		else {
@@ -101,27 +127,30 @@ allTasks.forEach((task) => {
 			})
 		}
 	})
+
+
+
 	const completed = task.children[0];
-	completed.addEventListener('click', () => {
-		console.log(completed)
+	function markAsComplete() {
 		if (selectedTask !== 3 && task.children[1] === replaceDiv) {
 			changingMessage.style.opacity = '1';
 		}
 
 		else if (task.children[1] === replaceDiv) {
 			completedTask++;
-			if(completedTask ===1){
+			localStorage.setItem('completedTask', completedTask)
+			if (completedTask === 1) {
 				reminderText.textContent = 'Nice Better than Nothing'
 			}
-			else if(completedTask ===2){
+			else if (completedTask === 2) {
 				reminderText.textContent = 'Amazing just one more left'
 			}
-			else{
+			else {
 				reminderText.textContent = 'Awesome all tasks completed. Done for the day'
 			}
 
 			progressMessage.innerText = `${completedTask}/${totalTask} completed`
-			progressMessage.style.color ='white'
+			progressMessage.style.color = 'white'
 
 
 			replaceDiv.classList.add('completedTask')
@@ -141,12 +170,20 @@ allTasks.forEach((task) => {
 			doneLogo.classList.add('done')
 			task.replaceChild(doneLogo, task.children[2])
 
-			
+
 			progressValue += 33.33;
+			localStorage.setItem('progressValue', progressValue)
 			progressBar.style.width = `${progressValue}%`
 
 
 		}
+	}
+
+
+
+	completed.addEventListener('click', () => {
+		markAsComplete()
 	})
+
 })
 
