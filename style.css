@@ -222,6 +222,21 @@ footer{
 	color: #d7a143;
 	transition: all 1s ease;
 }
+.clearLocalStorage{
+	height: 30px;
+	width: 100px;
+	background-color: #d7a143;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	font-size: 10px;
+	margin-right: auto;
+	margin-left: auto;
+	cursor: pointer;
+	margin-bottom: 20px;
+}
 @media (max-width: 468px){
 	.finalTask{
 		font-size: 10px;
@@ -239,11 +254,17 @@ footer{
 		font-size: 9px;
 	}
 	.mainContainer{
-		padding: 5px;
+		padding: 12px;
 	}
 	.circle{
 		height: 12px;
 		width: 12px;
 		flex-shrink: 0;
 	}
+	.warningMessage {
+    font-size: 10px;
+    color: #FF5151;
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
 }

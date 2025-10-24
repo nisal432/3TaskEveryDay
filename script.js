@@ -1,5 +1,9 @@
 console.log("okay this is working");
-localStorage.clear()
+const clearLocal = document.querySelector('.clearLocalStorage')
+clearLocal.addEventListener('click',()=>{
+
+	localStorage.clear()
+})
 const date = new Date()
 
 checkDate = date.toISOString().slice(0,10);
