@@ -53,7 +53,7 @@ allTasks.forEach((task, i) => {
 
 		const tick = document.createElement('img')
 		tick.classList.add('icon')
-		tick.src = '/imagesAndLogo/tick.png'
+		tick.src = './imagesAndLogo/tick.png'
 
 		task.replaceChild(tick, editElement)
 		tick.addEventListener('click', () => {
@@ -188,12 +188,12 @@ allTasks.forEach((task, i) => {
 
 
 			const completedLogo = document.createElement('img')
-			completedLogo.src = '/imagesAndLogo/completed.svg'
+			completedLogo.src = './imagesAndLogo/completed.svg'
 			completedLogo.classList.add('completedLogo')
 
 			task.replaceChild(completedLogo, completed)
 			const doneLogo = document.createElement('img')
-			doneLogo.src = '/imagesAndLogo/success.png'
+			doneLogo.src = './imagesAndLogo/success.png'
 			doneLogo.classList.add('done')
 			task.replaceChild(doneLogo, task.children[2])
 
