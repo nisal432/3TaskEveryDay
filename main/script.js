@@ -1,9 +1,28 @@
 console.log("okay this is working");
-localStorage.clear()
+// localStorage.clear()
 const date = new Date()
-console.log(date.toISOString());
-const todayDate = date.toISOString().slice(0,10)
-console.log(todayDate);
+
+checkDate = date.toISOString().slice(0,10);
+// checkDate = '0';
+console.log('today is the checkDate', checkDate);
+
+let todayDate ;
+if(localStorage.getItem('savedDate')){
+	todayDate = localStorage.getItem('savedDate')
+
+}
+else{
+	todayDate = date.toISOString().slice(0,10)
+	localStorage.setItem('savedDate', todayDate)
+
+}
+console.log('this is todaydate', todayDate);
+if(todayDate !== checkDate)
+	localStorage.clear()
+
+	 
+
+
 const changingMessage = document.querySelector('.warningMessage')
 let selectedTask = parseInt(localStorage.getItem('selectedTask')) || 0;
 let completedTask = parseInt(localStorage.getItem('completedTask')) || 0;
@@ -18,6 +37,7 @@ allTasks.forEach((task, i) => {
 
 	
 	const input = task.children[1]
+	const completed = task.children[0];
 	input.addEventListener('focus', () => {
 		changingMessage.style.opacity = '0'
 	})
@@ -39,9 +59,11 @@ allTasks.forEach((task, i) => {
 		tick.addEventListener('click', () => {
 
 
-			replaceDiv.innerText = input.value;
+			span.innerText = input.value;
+			mainObject.inputValue = input.value;
+			localStorage.setItem(`tasks${i}`, JSON.stringify(mainObject))
 			task.replaceChild(replaceDiv, input)
-			task.replaceChild(editElement, task.children[2])
+			task.replaceChild(editElement, tick)
 
 		})
 
@@ -81,7 +103,13 @@ allTasks.forEach((task, i) => {
 	}
 	
 	if(!mainObject.taskAdded){
+		if (selectedTask == 3 && !completedTask) {
+				progressMessage.innerText = '0/3 completed'
+			}
 		replaceInput(mainObject.inputValue)
+		if(mainObject.taskCompleted){
+			markAsComplete()
+		}
 	}
 
 
@@ -89,12 +117,13 @@ allTasks.forEach((task, i) => {
 
 		if (e.key === 'Enter' && input.value) {
 			if (mainObject.taskAdded) {
+				if(selectedTask!==3){
 				selectedTask++;
-				localStorage.setItem('selectedTask', selectedTask)
+				localStorage.setItem('selectedTask', selectedTask)}
 				mainObject.taskAdded = false;
 				localStorage.setItem(`tasks${i}`, JSON.stringify(mainObject))
 			}
-			if (selectedTask == 3) {
+			if (selectedTask == 3 && !completedTask) {
 				progressMessage.innerText = '0/3 completed'
 			}
 			replaceInput()
@@ -130,15 +159,13 @@ allTasks.forEach((task, i) => {
 
 
 
-	const completed = task.children[0];
+
 	function markAsComplete() {
 		if (selectedTask !== 3 && task.children[1] === replaceDiv) {
 			changingMessage.style.opacity = '1';
 		}
 
 		else if (task.children[1] === replaceDiv) {
-			completedTask++;
-			localStorage.setItem('completedTask', completedTask)
 			if (completedTask === 1) {
 				reminderText.textContent = 'Nice Better than Nothing'
 			}
@@ -171,8 +198,7 @@ allTasks.forEach((task, i) => {
 			task.replaceChild(doneLogo, task.children[2])
 
 
-			progressValue += 33.33;
-			localStorage.setItem('progressValue', progressValue)
+			
 			progressBar.style.width = `${progressValue}%`
 
 
@@ -182,7 +208,14 @@ allTasks.forEach((task, i) => {
 
 
 	completed.addEventListener('click', () => {
+		progressValue += 33.33;
+		localStorage.setItem('progressValue', progressValue)
+		if (task.children[1] === replaceDiv) {
+			completedTask++;
+			localStorage.setItem('completedTask', completedTask)}
 		markAsComplete()
+		mainObject.taskCompleted = true;
+		localStorage.setItem(`tasks${i}`, JSON.stringify(mainObject))
 	})
 
 })

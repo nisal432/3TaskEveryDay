@@ -222,3 +222,20 @@ footer{
 	color: #d7a143;
 	transition: all 1s ease;
 }
+@media (max-width: 468px){
+	.finalTask{
+		font-size: 10px;
+	}
+	.finalTask::before{
+		height: 1.2px;
+	}
+	.reminderText{
+		font-size: 10px;
+	}
+	footer{
+		font-size: 10px;
+	}
+	.inputGoals{
+		font-size: 9px;
+	}
+}
