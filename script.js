@@ -136,12 +136,33 @@ allTasks.forEach((task, i) => {
 
 		}
 	})
+
+	input.addEventListener('blur', (e) => {
+
+		if (input.value) {
+			if (mainObject.taskAdded) {
+				if(selectedTask!==3){
+				selectedTask++;
+				localStorage.setItem('selectedTask', selectedTask)}
+				mainObject.taskAdded = false;
+				localStorage.setItem(`tasks${i}`, JSON.stringify(mainObject))
+			}
+			if (selectedTask == 3 && !completedTask) {
+				progressMessage.innerText = '0/3 completed'
+			}
+			replaceInput()
+			mainObject.inputValue = input.value
+			localStorage.setItem(`tasks${i}`, JSON.stringify(mainObject))
+
+		}
+	})
 	
 
 	task.children[2].addEventListener('click', (e) => {
 		if (input.value) {
 			if (mainObject.taskAdded) {
 				selectedTask++;
+				localStorage.setItem('selectedTask', selectedTask)
 				mainObject.taskAdded = false;
 				localStorage.setItem(`tasks${i}`, JSON.stringify(mainObject))
 			}
