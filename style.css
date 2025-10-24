@@ -238,4 +238,12 @@ footer{
 	.inputGoals{
 		font-size: 9px;
 	}
+	.mainContainer{
+		padding: 5px;
+	}
+	.circle{
+		height: 12px;
+		width: 12px;
+		flex-shrink: 0;
+	}
 }

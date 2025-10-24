@@ -1,5 +1,5 @@
 console.log("okay this is working");
-// localStorage.clear()
+localStorage.clear()
 const date = new Date()
 
 checkDate = date.toISOString().slice(0,10);
@@ -145,6 +145,8 @@ allTasks.forEach((task, i) => {
 				progressMessage.innerText = '0/3 completed'
 			}
 			replaceInput()
+			mainObject.inputValue = input.value
+			localStorage.setItem(`tasks${i}`, JSON.stringify(mainObject))
 
 		}
 		else {
