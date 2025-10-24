@@ -163,7 +163,7 @@ footer{
 .finalTask::before{
 	content: '';
 	position: absolute;
-	top: 50%;
+	top: 51.5%;
 	height: 1.8px;
 	width: 0px;
 	background-color: #48A300;
